@@ -1,0 +1,42 @@
+{
+	"name": "@r6index/db",
+	"version": "1.0.0",
+	"description": "",
+	"type": "module",
+	"sideEffects": false,
+	"exports": {
+		"./client": {
+			"development": "./src/client/node.ts",
+			"production": "./src/client/cf.ts",
+			"default": "./src/client/cf.ts"
+		},
+		"./schema": "./src/schema.ts"
+	},
+	"scripts": {
+		"init": "pnpx supabase init",
+		"start": "pnpx supabase start",
+		"stop": "pnpx supabase stop",
+		"migrations:gen": "drizzle-kit generate:pg --config drizzle.config.ts",
+		"migrations:local:apply": "dotenv -e .env.local -- tsx drizzle/migration.ts",
+		"lint": "biome lint ./src",
+		"lint:fix": "biome check --apply ./src",
+		"format:check": "biome format ./src",
+		"format:write": "biome format --write ./src",
+		"format:help": "biome format --help ./src"
+	},
+	"author": "Elias Sebastian",
+	"license": "ISC",
+	"devDependencies": {
+		"@r6index/shared-types": "workspace:^",
+		"@types/node": "^20.11.20",
+		"@types/pg": "^8.11.0",
+		"drizzle-kit": "^0.20.14",
+		"pg": "^8.11.3",
+		"supabase": "^1.145.4",
+		"typescript": "^5.3.3"
+	},
+	"dependencies": {
+		"drizzle-orm": "^0.29.4",
+		"postgres": "^3.4.3"
+	}
+}

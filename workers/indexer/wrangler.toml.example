@@ -1,0 +1,42 @@
+name = "r6index-player-indexer"
+main = "src/index.ts"
+compatibility_date = "2024-01-29"
+compatibility_flags = [ "nodejs_compat" ]
+
+[dev]
+port = 8788
+
+[[kv_namespaces]]
+binding = "KV"
+# id = ""
+
+[[queues.producers]]
+# queue = ""
+binding = "QUEUE"
+
+[[queues.consumers]]
+# queue = ""
+# max_batch_size = 10
+# max_batch_timeout = 30
+# max_retries = 10
+# dead_letter_queue = ""
+
+[env.production.vars]
+ENVIRONMENT = "prod"
+
+[[env.production.kv_namespaces]]
+binding = "KV"
+# id = ""
+
+[[env.production.queues.producers]]
+# queue = ""
+binding = "QUEUE"
+
+[[env.production.queues.consumers]]
+# queue = ""
+# max_batch_size = 10
+# max_batch_timeout = 30
+# max_retries = 10
+# dead_letter_queue = ""
+
+

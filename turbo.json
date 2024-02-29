@@ -1,0 +1,51 @@
+{
+	"$schema": "https://turbo.build/schema.json",
+	"pipeline": {
+		"build": {
+			"dependsOn": [
+				"^build"
+			],
+			"outputs": [
+				"!.next/cache/**",
+				".next/**",
+				"dist/**",
+				"build/**",
+				".vercel/**"
+			]
+		},
+		"lint": {
+			"dependsOn": [
+				"^lint"
+			]
+		},
+		"lint:fix": {
+			"dependsOn": [
+				"^lint:fix"
+			]
+		},
+		"format:help": {
+			"dependsOn": [
+				"^format:help"
+			]
+		},
+		"format:check": {
+			"dependsOn": [
+				"^format:check"
+			]
+		},
+		"format:write": {
+			"dependsOn": [
+				"^format:write"
+			]
+		},
+		"format": {
+			"dependsOn": [
+				"^format"
+			]
+		},
+		"dev": {
+			"cache": false,
+			"persistent": true
+		}
+	}
+}

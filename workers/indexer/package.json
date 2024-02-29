@@ -1,0 +1,29 @@
+{
+	"name": "indexer",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev --persist-to=../../.wrangler/state",
+		"start": "wrangler dev",
+		"lint": "biome lint ./src",
+		"lint:fix": "biome check --apply ./src",
+		"format:check": "biome format ./src",
+		"format:write": "biome format --write ./src",
+		"format:help": "biome format --help ./src"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20240208.0",
+		"@r6index/shared-types": "workspace:^",
+		"@types/node": "^20.11.20",
+		"typescript": "^5.3.3",
+		"wrangler": "^3.29.0"
+	},
+	"dependencies": {
+		"@r6index/db": "workspace:^",
+		"@r6index/ubisoft-api-client": "workspace:^",
+		"drizzle-orm": "^0.29.4",
+		"valibot": "^0.26.0"
+	}
+}

@@ -1,0 +1,7 @@
+{
+	"git": {
+		"deploymentEnabled": false
+	},
+	"buildCommand": "pnpm -w run build:profiler",
+	"framework": "nextjs"
+}

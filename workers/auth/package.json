@@ -1,0 +1,24 @@
+{
+	"name": "auth",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"test:dryrun": "wrangler deploy --outdir='./dist' --dry-run",
+		"deploy": "wrangler deploy",
+		"dev": "bash ./scripts/dev.sh",
+		"start": "wrangler dev",
+		"lint": "biome lint ./src",
+		"lint:fix": "biome check --apply ./src",
+		"format:check": "biome format ./src",
+		"format:write": "biome format --write ./src",
+		"format:help": "biome format --help ./src"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20240222.0",
+		"@r6index/shared-types": "workspace:^",
+		"@types/node": "^20.11.22",
+		"typescript": "^5.3.3",
+		"wrangler": "^3.30.0"
+	}
+}

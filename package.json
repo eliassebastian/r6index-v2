@@ -1,0 +1,42 @@
+{
+	"name": "r6index-demo",
+	"private": true,
+	"scripts": {
+		"setup": "node scripts/setup.mjs",
+		"db:init": "pnpm --filter=db run init",
+		"db:start": "pnpm --filter=db run start",
+		"db:stop": "pnpm --filter=db run stop",
+		"build:web": "turbo build --filter=web",
+		"build:profiler": "turbo build --filter=profiler",
+		"dev": "node scripts/dev-check.mjs && turbo dev --filter=!profiler",
+		"lint": "turbo lint --continue",
+		"lint:fix": "turbo lint:fix --continue",
+		"format:check": "turbo format:check --continue",
+		"format:write": "turbo format:write --continue",
+		"format:help": "turbo format:help --continue",
+		"indexer:lint-format-check": "turbo lint format:check --continue --filter=indexer",
+		"indexer:lint-format-fix": "turbo lint:fix format:write --continue --filter=indexer",
+		"auth:lint-format-check": "turbo lint format:check --continue --filter=auth",
+		"auth:lint-format-fix": "turbo lint:fix format:write --continue --filter=auth",
+		"web:lint-format-check": "turbo lint format:check --continue --filter=web",
+		"web:lint-format-fix": "turbo lint:fix format:write --continue --filter=web",
+		"profiler:lint-format-check": "turbo lint format:check --continue --filter=profiler",
+		"profiler:lint-format-fix": "turbo lint:fix format:write --continue --filter=profiler",
+		"prepare": "husky"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.5.3",
+		"husky": "^9.0.11",
+		"lint-staged": "^15.2.2",
+		"turbo": "latest"
+	},
+	"packageManager": "pnpm@8.15.0",
+	"engines": {
+		"node": ">=18"
+	},
+	"lint-staged": {
+		"*": [
+			"biome check --no-errors-on-unmatched --files-ignore-unknown=true"
+		]
+	}
+}

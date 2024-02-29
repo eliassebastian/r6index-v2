@@ -1,0 +1,57 @@
+name: Web App Deployment
+
+on:
+  workflow_dispatch:
+  # push:
+  #   paths:
+  #     - "apps/web/**"
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    name: Deploy to Cloudflare Pages
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: 'pnpm'
+
+      - run: pnpm --filter=web install --frozen-lockfile
+
+      - name: Lint and Formatting
+        run: pnpm run web:lint-format-check
+
+      - name: Build
+        run: pnpm run build:web
+
+      - name: Publish
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_AW_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: './apps/web'
+          packageManager: pnpm
+          wranglerVersion: '3.29.0'
+          environment: production
+          command: 'pages deploy ./build/client --project-name=r6index --commit-dirty=true'
+          secrets: |
+            UBISOFT_APPID
+            UBISOFT_NEWAPPID
+            UBISOFT_URL
+            UBISOFT_USERAGENT
+            SUPABASE_URL
+        env:
+          UBISOFT_APPID: ${{ secrets.UBISOFT_APPID }}
+          UBISOFT_NEWAPPID: ${{ secrets.UBISOFT_NEWAPPID }}
+          UBISOFT_URL: ${{ secrets.UBISOFT_URL }}
+          UBISOFT_USERAGENT: ${{ secrets.UBISOFT_USERAGENT }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}

@@ -1,0 +1,26 @@
+{
+	"name": "@r6index/ubisoft-api-client",
+	"version": "1.0.0",
+	"description": "",
+	"type": "module",
+	"sideEffects": false,
+	"exports": {
+		"./requests": "./src/requests.ts",
+		"./utils": "./src/utils.ts",
+		"./errors": "./src/errors.ts"
+	},
+	"scripts": {
+		"lint": "biome lint ./src",
+		"lint:fix": "biome check --apply ./src",
+		"format:check": "biome format ./src",
+		"format:write": "biome format --write ./src",
+		"format:help": "biome format --help ./src"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/node": "^20.11.13",
+		"typescript": "^5.3.3"
+	}
+}

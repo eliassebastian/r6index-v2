@@ -1,0 +1,24 @@
+{
+	"name": "@r6index/shared-types",
+	"version": "1.0.0",
+	"description": "",
+	"type": "module",
+	"sideEffects": false,
+	"exports": {
+		"./players": "./src/players/index.ts",
+		"./ubisoft": "./src/ubisoft/index.ts"
+	},
+	"scripts": {
+		"lint": "biome lint ./src",
+		"lint:fix": "biome check --apply ./src",
+		"format:check": "biome format ./src",
+		"format:write": "biome format --write ./src",
+		"format:help": "biome format --help ./src"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"typescript": "^5.3.3"
+	}
+}

@@ -1,0 +1,184 @@
+{
+	"id": "0a950895-b3cd-422a-a507-071d9265936a",
+	"prevId": "00000000-0000-0000-0000-000000000000",
+	"version": "5",
+	"dialect": "pg",
+	"tables": {
+		"players": {
+			"name": "players",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "uuid",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"user_id": {
+					"name": "user_id",
+					"type": "uuid",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar(52)",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp with time zone",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"last_seen_at": {
+					"name": "last_seen_at",
+					"type": "text",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"platform": {
+					"name": "platform",
+					"type": "platform",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "'uplay'"
+				},
+				"level": {
+					"name": "level",
+					"type": "jsonb",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"aliases": {
+					"name": "aliases",
+					"type": "jsonb",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "'[]'::jsonb"
+				},
+				"summary": {
+					"name": "summary",
+					"type": "jsonb",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"trends": {
+					"name": "trends",
+					"type": "jsonb",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"operators": {
+					"name": "operators",
+					"type": "jsonb",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"weapons": {
+					"name": "weapons",
+					"type": "jsonb",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"maps": {
+					"name": "maps",
+					"type": "jsonb",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"ranked": {
+					"name": "ranked",
+					"type": "jsonb",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {}
+		},
+		"similar": {
+			"name": "similar",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "uuid",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"similar_id": {
+					"name": "similar_id",
+					"type": "uuid",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {
+				"similar_profile_idx": {
+					"name": "similar_profile_idx",
+					"columns": [
+						"id"
+					],
+					"isUnique": false
+				}
+			},
+			"foreignKeys": {
+				"similar_id_players_id_fk": {
+					"name": "similar_id_players_id_fk",
+					"tableFrom": "similar",
+					"tableTo": "players",
+					"columnsFrom": [
+						"id"
+					],
+					"columnsTo": [
+						"id"
+					],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				},
+				"similar_similar_id_players_id_fk": {
+					"name": "similar_similar_id_players_id_fk",
+					"tableFrom": "similar",
+					"tableTo": "players",
+					"columnsFrom": [
+						"similar_id"
+					],
+					"columnsTo": [
+						"id"
+					],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {
+				"pk_similar_users": {
+					"name": "pk_similar_users",
+					"columns": [
+						"id",
+						"similar_id"
+					]
+				}
+			},
+			"uniqueConstraints": {}
+		}
+	},
+	"enums": {},
+	"schemas": {},
+	"_meta": {
+		"columns": {},
+		"schemas": {},
+		"tables": {}
+	}
+}

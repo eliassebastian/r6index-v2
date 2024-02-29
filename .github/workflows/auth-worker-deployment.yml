@@ -1,0 +1,64 @@
+name: Auth Worker Deployment
+
+on:
+  workflow_dispatch:
+  # push:
+  #   paths:
+  #     - 'workers/auth/**'
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy Auth Worker to Cloudflare Workers
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8.15.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: pnpm --filter=auth install --no-frozen-lockfile
+
+      - name: Lint and Formatting
+        run: pnpm run auth:lint-format-check
+    
+      - name: Publish
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_AW_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: './workers/auth'
+          packageManager: pnpm
+          wranglerVersion: '3.29.0'
+          secrets: |
+            UBISOFT_APPID
+            UBISOFT_NEWAPPID
+            UBISOFT_URL
+            UBISOFT_USERAGENT
+            UBISOFT_CLIENT_ID_1
+            UBISOFT_CLIENT_ID_2
+            UBISOFT_CLIENT_ID_3
+            UBISOFT_CLIENT_ID_4
+            UBISOFT_CLIENT_PASSWORD_1
+            UBISOFT_CLIENT_PASSWORD_2
+            UBISOFT_CLIENT_PASSWORD_3
+            UBISOFT_CLIENT_PASSWORD_4
+        env:
+          UBISOFT_APPID: ${{ secrets.UBISOFT_APPID }}
+          UBISOFT_NEWAPPID: ${{ secrets.UBISOFT_NEWAPPID }}
+          UBISOFT_URL: ${{ secrets.UBISOFT_URL }}
+          UBISOFT_USERAGENT: ${{ secrets.UBISOFT_USERAGENT }}
+          UBISOFT_CLIENT_ID_1: ${{ secrets.UBISOFT_CLIENT_ID_1 }}
+          UBISOFT_CLIENT_ID_2: ${{ secrets.UBISOFT_CLIENT_ID_2 }}
+          UBISOFT_CLIENT_ID_3: ${{ secrets.UBISOFT_CLIENT_ID_3 }}
+          UBISOFT_CLIENT_ID_4: ${{ secrets.UBISOFT_CLIENT_ID_4 }}
+          UBISOFT_CLIENT_PASSWORD_1: ${{ secrets.UBISOFT_CLIENT_PASSWORD_1 }}
+          UBISOFT_CLIENT_PASSWORD_2: ${{ secrets.UBISOFT_CLIENT_PASSWORD_2 }}
+          UBISOFT_CLIENT_PASSWORD_3: ${{ secrets.UBISOFT_CLIENT_PASSWORD_3 }}
+          UBISOFT_CLIENT_PASSWORD_4: ${{ secrets.UBISOFT_CLIENT_PASSWORD_4 }}

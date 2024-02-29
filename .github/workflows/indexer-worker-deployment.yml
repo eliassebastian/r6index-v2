@@ -1,0 +1,51 @@
+name: Indexer Worker Deployment
+
+on:
+  workflow_dispatch:
+  # push:
+  #   paths:
+  #     - 'workers/indexer/**'
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy Indexer Worker to Cloudflare Workers
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8.15.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: pnpm --filter=indexer install --no-frozen-lockfile
+
+      - name: Lint and Formatting
+        run: pnpm run indexer:lint-format-check
+
+      - name: Publish
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_AW_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: './workers/indexer'
+          packageManager: pnpm
+          wranglerVersion: '3.29.0'
+          environment: production
+          secrets: |
+            UBISOFT_APPID
+            UBISOFT_NEWAPPID
+            UBISOFT_URL
+            UBISOFT_USERAGENT
+            SUPABASE_URL
+        env:
+          UBISOFT_APPID: ${{ secrets.UBISOFT_APPID }}
+          UBISOFT_NEWAPPID: ${{ secrets.UBISOFT_NEWAPPID }}
+          UBISOFT_URL: ${{ secrets.UBISOFT_URL }}
+          UBISOFT_USERAGENT: ${{ secrets.UBISOFT_USERAGENT }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
