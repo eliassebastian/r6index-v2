@@ -174,5 +174,7 @@ Rate Limiting: The project does not include rate limiting, this should be added 
 - Pill in AnimatedTabs may not show up on initial render
 - Search Menu Profiles may not show up on initial render
 
+## LICENSE
 
+[MIT](https://choosealicense.com/licenses/mit/)
 
