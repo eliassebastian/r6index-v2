@@ -17,6 +17,7 @@
 		"start": "pnpx supabase start",
 		"stop": "pnpx supabase stop",
 		"reset": "pnpx supabase db reset",
+		"status": "pnpx supabase status",
 		"seed:local": "dotenv -e .env.local -- tsx drizzle/seed.ts",
 		"migrations:gen": "drizzle-kit generate:pg --config drizzle.config.ts",
 		"migrations:local:apply": "dotenv -e .env.local -- tsx drizzle/migration.ts",
