@@ -16,8 +16,11 @@
 		"init": "pnpx supabase init",
 		"start": "pnpx supabase start",
 		"stop": "pnpx supabase stop",
+		"reset": "pnpx supabase db reset",
+		"seed:local": "dotenv -e .env.local -- tsx drizzle/seed.ts",
 		"migrations:gen": "drizzle-kit generate:pg --config drizzle.config.ts",
 		"migrations:local:apply": "dotenv -e .env.local -- tsx drizzle/migration.ts",
+		"migrations:prod:deploy": "dotenv -e .env.production -- tsx drizzle/migration.ts",
 		"lint": "biome lint ./src",
 		"lint:fix": "biome check --apply ./src",
 		"format:check": "biome format ./src",
@@ -30,9 +33,11 @@
 		"@r6index/shared-types": "workspace:^",
 		"@types/node": "^20.11.20",
 		"@types/pg": "^8.11.0",
+		"dotenv-cli": "^7.3.0",
 		"drizzle-kit": "^0.20.14",
 		"pg": "^8.11.3",
 		"supabase": "^1.145.4",
+		"tsx": "^4.7.1",
 		"typescript": "^5.3.3"
 	},
 	"dependencies": {
