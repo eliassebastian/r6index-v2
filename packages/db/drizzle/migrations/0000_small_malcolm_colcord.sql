@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS pgroonga;
+--> statement-breakpoint
 DO $$ BEGIN
  CREATE TYPE "platform" AS ENUM('uplay', 'xbl', 'psn');
 EXCEPTION
