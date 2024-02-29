@@ -21,31 +21,15 @@
 				"useExhaustiveDependencies": "off"
 			}
 		},
-		"ignore": [
-			"node_modules",
-			"dist",
-			".next",
-			"build",
-			".cache",
-			".github",
-			".vercel",
-			".vscode",
-			".wrangler"
-		]
+		"ignore": ["node_modules", "dist", ".next", "build", ".cache", ".github", ".vercel", ".vscode", ".wrangler"]
 	},
 	"formatter": {
 		"enabled": true,
 		"formatWithErrors": true,
-		"indentWidth": 120,
-		"ignore": [
-			".turbo",
-			".wrangler",
-			"node_modules",
-			"dist",
-			".next",
-			"build",
-			".cache"
-		]
+		"indentWidth": 2,
+		"indentStyle": "tab",
+		"lineWidth": 120,
+		"ignore": [".turbo", ".wrangler", "node_modules", "dist", ".next", "build", ".cache"]
 	},
 	"javascript": {
 		"formatter": {
