@@ -32,16 +32,6 @@ export default function Index() {
 								)}
 							</SearchMenuDialog>
 						</li>
-						<li>
-							<Link className={'h-9 py-0 px-3 flex items-center justify-center uppercase'} href='/analytics'>
-								Analytics
-							</Link>
-						</li>
-						<li className='hidden md:block'>
-							<Link className={'h-9 py-0 px-3 flex items-center justify-center uppercase'} href='/contact'>
-								Contact
-							</Link>
-						</li>
 					</ul>
 				</nav>
 			</header>
