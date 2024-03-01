@@ -52,6 +52,7 @@ Prerequisites needed to run the project are the following:
 - [Vercel](https://vercel.com/) - Serverless Functions
 - [PNPM](https://pnpm.io) - Package Manager
 - [BiomeJS](https://biomejs.com) - Format and Lint
+- [Uplay](https://account.ubisoft.com/en-US/login) - Ubisoft Uplay Account for API access
 
 ### Installation
 
